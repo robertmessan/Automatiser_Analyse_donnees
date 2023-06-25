@@ -158,11 +158,9 @@ def page_accueil():
             try:
                 st.subheader("Base de données résultante")
                 st.write(data)
+                return data
             except Exception as e:
-                st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))
-            
-            return data
-    
+                st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))   
     elif option == "Utiliser une base de données en ligne":
         base_donnees_en_ligne = st.radio("Nous vous proposons cette base de données synthétique:", ("Données commerciales",))
         if base_donnees_en_ligne == "Données commerciales":
