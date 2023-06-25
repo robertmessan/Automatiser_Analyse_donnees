@@ -89,7 +89,7 @@ def creer_tableaux_de_bord(data):
                     st.write("La variable sélectionnée ne contient pas de données catégorielles.")
             
             if "Bâtons" in chart_types:
-                st.markdown('<h1 style="blue: green;">Diagramme en bâtons</h1>', unsafe_allow_html=True)
+                st.markdown('<h1 style="color: green;">Diagramme en bâtons</h1>', unsafe_allow_html=True)
                 if data[column].dtype == "object":
                     fig, ax = plt.subplots()
                     data[column].value_counts().plot(kind='bar', ax=ax)
