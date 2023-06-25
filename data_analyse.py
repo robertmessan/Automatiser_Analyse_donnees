@@ -153,7 +153,7 @@ def page_accueil():
             return data
     
     elif option == "Utiliser une base de données en ligne":
-        base_donnees_en_ligne = st.radio("Choisir une base de données en ligne", ("Données commerciales",))
+        base_donnees_en_ligne = st.radio("Nous vous proposons cette base de données synthétique:", ("Données commerciales",))
         if base_donnees_en_ligne == "Données commerciales":
             # Charger la base de données en ligne (exemple avec base Commerciale)
             url = "https://raw.githubusercontent.com/robertmessan/lunettes_parlantes/main/data_bd.csv"  # Remplacer l'URL par l'URL réelle de la base de données en ligne
