@@ -218,7 +218,7 @@ def main():
     st.set_page_config(page_title="Automatisez vos tâches fastidueuses", layout="wide")
     
     # Page d'accueil
-        data = page_accueil()
+    data = page_accueil()
     
     if data is not None:
         # Affichage des boîtes à moustaches
