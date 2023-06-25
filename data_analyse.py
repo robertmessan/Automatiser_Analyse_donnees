@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import requests
 from io import StringIO
+import time
 
 # Fonction pour charger une base de données à partir d'un fichier
 def charger_base_de_donnees(fichier):
