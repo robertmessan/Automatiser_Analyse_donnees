@@ -38,11 +38,13 @@ def nettoyer_donnees_manquantes(data, method):
 # Fonction pour afficher les statistiques des données
 def afficher_statistiques(data):
     st.subheader("Statistiques des données")
-    st.write("Nombre de valeurs manquantes :", data.isnull().sum().sum())
+    st.write("Nombre de valeurs manquantes :", data.isnull().sum())
     st.write("Moyenne :", data.mean())
     st.write("Médiane :", data.median())
     st.write("Nombre de lignes :", data.shape[0])
     st.write("Nombre de variables :", data.shape[1])
+    st.write("nombre de doublons sur les lignes:",data.shape[0]-len(data.drop_duplicates()))
+    st.write("nombre de doublons sur les colonnes:",data.shape[1]-len(data.drop_duplicates()))
     st.write("Plus de statistiques:",data.describe())
     st.write("Plus d'informations:")
     st.write(data.dtypes)
