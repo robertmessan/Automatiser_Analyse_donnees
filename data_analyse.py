@@ -128,13 +128,15 @@ def page_accueil():
                 st.error("Veuillez sélectionner des données tabulaires : {}".format(str(e)))
             
             # Supprimer des colonnes
-            st.subheader("Eliminer des variables")
-            selected_columns = st.multiselect("Sélectionner les variables à éliminer", data.columns)
-            data = data.drop(columns=selected_columns)
-            
-            # Affichage des statistiques initiales
-            afficher_statistiques(data)
-            
+            try:
+                st.subheader("Eliminer des variables")
+                selected_columns = st.multiselect("Sélectionner les variables à éliminer", data.columns)
+                data = data.drop(columns=selected_columns)
+                
+                # Affichage des statistiques initiales
+                afficher_statistiques(data)
+            except Exception as e:
+                st.error("Les données n'ont pas été correctement chargées : {}".format(str(e)))
             # Nettoyage des données aberrantes
             if st.button("Les valeurs aberrantes"):
                 data = nettoyer_donnees_aberrantes(data)
