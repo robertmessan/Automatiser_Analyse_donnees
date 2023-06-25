@@ -205,7 +205,6 @@ def page_accueil():
                 st.write("Nombre de valeurs manquantes :", data.isnull().sum())
             else:
                 st.write("Nombre de valeurs manquantes :", data.isnull().sum())
-            st.subheader("Base de données résultante")
             st.markdown('<h2 style="color: blue;">Base de données résultante</h2>', unsafe_allow_html=True)
             st.write(data)
             
