@@ -206,3 +206,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+st.markdown("Réalisé avec💖par Robert ")  
+    
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
