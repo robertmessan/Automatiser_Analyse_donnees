@@ -154,8 +154,9 @@ def page_accueil():
             except Exception as e:
                 st.error("Que des données tabulaire: {}".format(str(e)))
             # Affichage de la base de données résultante
-            st.subheader("Base de données résultante")
+
             try:
+                st.subheader("Base de données résultante")
                 st.write(data)
             except Exception as e:
                 st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))
@@ -217,7 +218,7 @@ def main():
     st.set_page_config(page_title="Automatisez vos tâches fastidueuses", layout="wide")
     
     # Page d'accueil
-    data = page_accueil()
+        data = page_accueil()
     
     if data is not None:
         # Affichage des boîtes à moustaches
