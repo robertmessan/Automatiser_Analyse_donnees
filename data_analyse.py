@@ -234,10 +234,10 @@ for i in range(len(phrase)):
     phrase_affichee.subheader(phrase[:i+1])
     time.sleep(0.03)
     
-#hide_streamlit_style = """
-            #<style>
-            #MainMenu {visibility: hidden;}
-            #footer {visibility: hidden;}
-            #</style>
-            #"""
-#st.markdown(hide_streamlit_style, unsafe_allow_html=True)'''
+hide_streamlit_style = """
+            <style>
+            MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
