@@ -155,7 +155,10 @@ def page_accueil():
                 st.error("Que des données tabulaire: {}".format(str(e)))
             # Affichage de la base de données résultante
             st.subheader("Base de données résultante")
-            st.write(data)
+            try:
+                st.write(data)
+            except Exception as e:
+                st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))
             
             return data
     
