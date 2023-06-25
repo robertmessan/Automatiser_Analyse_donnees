@@ -1,4 +1,4 @@
 pandas==2.0.2
-streamlit==0.89.0
+streamlit==1.21.0
 requests==2.26.0
 matplotlib==3.7.0
