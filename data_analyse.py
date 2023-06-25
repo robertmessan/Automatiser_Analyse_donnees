@@ -228,7 +228,11 @@ def main():
 if __name__ == "__main__":
     main()
 
-st.markdown("Réalisé avec💖par Robert ")  
+phrase = "Réalisé avec💖par Robert"
+    phrase_affichee = st.empty()
+    for i in range(len(phrase)):
+        phrase_affichee.subheader(phrase[:i+1])
+        time.sleep(0.03)
     
 #hide_streamlit_style = """
             #<style>
