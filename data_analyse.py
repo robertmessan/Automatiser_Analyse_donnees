@@ -44,7 +44,7 @@ def afficher_statistiques(data):
     st.write("Nombre de variables :", data.shape[1])
     st.write("Plus de statistiques:",data.describe())
     st.write("Plus d'informations:")
-    st.write(data.info())
+    st.write(data.types())
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
 def afficher_boites_a_moustaches(data):
