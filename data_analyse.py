@@ -138,7 +138,7 @@ def page_accueil():
             except Exception as e:
                 st.error("Les données n'ont pas été correctement chargées : {}".format(str(e)))
             # Nettoyage des données aberrantes
-            if st.button("Les valeurs aberrantes"):
+            if st.button("Supprimer les valeurs aberrantes"):
                 data = nettoyer_donnees_aberrantes(data)
                 st.write("Nombre de données aberrantes :", data.isnull().sum())
             
@@ -190,16 +190,16 @@ def page_accueil():
             # Nettoyage des données aberrantes
             if st.button("Supprimer les données aberrantes"):
                 data = nettoyer_donnees_aberrantes(data)
-                st.write("Nombre de données aberrantes :", data.isnull().sum().sum())
+                st.write("Nombre de données aberrantes après traitement :", data.isnull().sum())
             
             # Nettoyage des valeurs manquantes
             st.subheader("Nettoyage des valeurs manquantes")
             nettoyage_method = st.selectbox("Méthode de nettoyage", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
             if nettoyage_method != "Supprimer":
                 data = nettoyer_donnees_manquantes(data, nettoyage_method)
-                st.write("Nombre de valeurs manquantes :", data.isnull().sum().sum())
+                st.write("Nombre de valeurs manquantes :", data.isnull().sum())
             else:
-                st.write("Nombre de valeurs manquantes :", data.isnull().sum().sum())
+                st.write("Nombre de valeurs manquantes :", data.isnull().sum())
             # Affichage de la base de données résultante
             st.subheader("Base de données résultante")
             st.write(data)
