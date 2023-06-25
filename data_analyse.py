@@ -236,7 +236,7 @@ for i in range(len(phrase)):
     phrase_affichee.subheader(phrase[:i+1])
     time.sleep(0.01)
 
-st.markdown('<h2 style="color: blue;">Si vous avez des propositions, n'hésitez surtout pas. Envoyez moi un petit message sympa😊 et je vous réponds</h2>', unsafe_allow_html=True)
+st.markdown('<h2 style="color: blue;">Si vous avez des propositions, n\'hésitez surtout pas. Envoyez moi un petit message sympa😊 et je vous réponds</h2>', unsafe_allow_html=True)
 hide_streamlit_style = """
             <style>
             MainMenu {visibility: hidden;}
