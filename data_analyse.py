@@ -43,8 +43,8 @@ def afficher_statistiques(data):
     st.write("Nombre de lignes :", data.shape[0])
     st.write("Nombre de variables :", data.shape[1])
     st.write("Plus de statistiques:",data.describe())
-    st.write("Plus d'informations:")
     df = pd.DataFrame(data)
+    st.write("Plus d'informations:")
     st.write(df.info())
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
@@ -121,8 +121,10 @@ def page_accueil():
                 # Affichage de la base de données initiale
                 st.subheader("Base de données initiale")
                 st.write(data)
-                st.write("l'entête de la base de données:")
+                st.subheader("les premières lignes de la base de données:")
                 st.write(data.head())
+                st.subheader("les dernières lignes de la base de données:")
+                st.write(data.tail())
             except Exception as e:
                 st.error("Veuillez sélectionner des données tabulaires : {}".format(str(e)))
             
@@ -163,8 +165,10 @@ def page_accueil():
                 data = charger_base_de_donnees_en_ligne(url)
                 st.subheader("Base de données initiale :")
                 st.write(data)
-                st.write("l'entête de la base de données:")
+                st.subheader("les premières lignes de la base de données:")
                 st.write(data.head())
+                st.subheader("les dernières lignes de la base de données:")
+                st.write(data.tail())
                 # Reste du code pour le nettoyage des données et la création des tableaux de bord
 
             except Exception as e:
