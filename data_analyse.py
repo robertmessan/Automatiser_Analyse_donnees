@@ -89,7 +89,7 @@ def creer_tableaux_de_bord(data):
                     st.write("La variable sélectionnée ne contient pas de données catégorielles.")
             
             if "Bâtons" in chart_types:
-                st.markdown('<h1 style="color: green;">Diagramme en bâtons</h1>', unsafe_allow_html=True)
+                st.markdown('<h1 style="blue: green;">Diagramme en bâtons</h1>', unsafe_allow_html=True)
                 if data[column].dtype == "object":
                     fig, ax = plt.subplots()
                     data[column].value_counts().plot(kind='bar', ax=ax)
@@ -170,9 +170,9 @@ def page_accueil():
                 data = charger_base_de_donnees_en_ligne(url)
                 st.subheader("Base de données initiale :")
                 st.write(data)
-                st.markdown('<h2 style="color: blue;">les premières lignes de la base de données:</h2>', unsafe_allow_html=True)
+                st.markdown('<h1 style="color: blue;">les premières lignes de la base de données:</h1>', unsafe_allow_html=True)
                 st.write(data.head())
-                st.markdown('<h2 style="color: blue;">les dernières lignes de la base de données:</h2>', unsafe_allow_html=True)
+                st.markdown('<h1 style="color: blue;">les dernières lignes de la base de données:</h1>', unsafe_allow_html=True)
                 st.write(data.tail())
                 # Reste du code pour le nettoyage des données et la création des tableaux de bord
 
