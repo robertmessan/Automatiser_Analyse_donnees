@@ -78,7 +78,7 @@ def creer_tableaux_de_bord(data):
             chart_types = st.multiselect("Sélectionner les types de diagrammes", ("Circulaire", "Bâtons"), key=f"{column}_chart_types")
             
             if "Circulaire" in chart_types:
-                st.subheader("Diagramme circulaire")
+                st.markdown('<h1 style="color: green;">Diagramme circulaire</h1>', unsafe_allow_html=True)
                 if data[column].dtype == "object":
                     fig, ax = plt.subplots()
                     data[column].value_counts().plot(kind='pie', autopct='%1.1f%%', ax=ax)
@@ -89,7 +89,7 @@ def creer_tableaux_de_bord(data):
                     st.write("La variable sélectionnée ne contient pas de données catégorielles.")
             
             if "Bâtons" in chart_types:
-                st.subheader("Diagramme en bâtons")
+                st.markdown('<h1 style="color: green;">Diagramme en bâtons</h1>', unsafe_allow_html=True)
                 if data[column].dtype == "object":
                     fig, ax = plt.subplots()
                     data[column].value_counts().plot(kind='bar', ax=ax)
@@ -105,8 +105,8 @@ def charger_base_de_donnees_en_ligne(url):
 
 # Page d'accueil
 def page_accueil():
-    st.title("Automatisez vos tâches fastidueuses")
-    st.write("Bienvenue ! Veuillez sélectionner une base de données à analyser.")
+    st.title("Automatisez vos tâches fastidueuses du process data")
+    st.markdown('<h2 style="color: blue;">Bienvenue ! Veuillez sélectionner une base de données à analyser.</h2>', unsafe_allow_html=True)
 
     option = st.radio("Choisir une option", ("Charger une base de données locale", "Utiliser une base de données en ligne"))
     
@@ -120,9 +120,9 @@ def page_accueil():
                 # Affichage de la base de données initiale
                 st.subheader("Base de données initiale")
                 st.write(data)
-                st.subheader("les premières lignes de la base de données:")
+                st.markdown('<h2 style="color: blue;">les premières lignes de la base de données:</h2>', unsafe_allow_html=True)
                 st.write(data.head())
-                st.subheader("les dernières lignes de la base de données:")
+                st.markdown('<h2 style="color: blue;">les premières lignes de la base de données:</h2>', unsafe_allow_html=True)
                 st.write(data.tail())
             except Exception as e:
                 st.error("Veuillez sélectionner des données tabulaires : {}".format(str(e)))
@@ -144,13 +144,15 @@ def page_accueil():
             
             # Nettoyage des valeurs manquantes
             st.subheader("traitement des valeurs manquantes")
-            nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
-            if nettoyage_method != "Supprimer":
-                data = nettoyer_donnees_manquantes(data, nettoyage_method)
-                st.write("Nombre de valeurs manquantes après traitement:", data.isnull().sum())
-            else:
-                st.write("Nombre de valeurs manquantes après traitement :", data.isnull().sum())
-            
+            try:
+                nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
+                if nettoyage_method != "Supprimer":
+                    data = nettoyer_donnees_manquantes(data, nettoyage_method)
+                    st.write("Nombre de valeurs manquantes après traitement:", data.isnull().sum())
+                else:
+                    st.write("Nombre de valeurs manquantes après traitement :", data.isnull().sum())
+            except Exception as e:
+                st.error("Que des données tabulaire: {}".format(str(e)))
             # Affichage de la base de données résultante
             st.subheader("Base de données résultante")
             st.write(data)
@@ -166,9 +168,9 @@ def page_accueil():
                 data = charger_base_de_donnees_en_ligne(url)
                 st.subheader("Base de données initiale :")
                 st.write(data)
-                st.subheader("les premières lignes de la base de données:")
+                st.markdown('<h2 style="color: blue;">les premières lignes de la base de données:</h2>', unsafe_allow_html=True)
                 st.write(data.head())
-                st.subheader("les dernières lignes de la base de données:")
+                st.markdown('<h2 style="color: blue;">les dernières lignes de la base de données:</h2>', unsafe_allow_html=True)
                 st.write(data.tail())
                 # Reste du code pour le nettoyage des données et la création des tableaux de bord
 
