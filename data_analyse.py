@@ -43,7 +43,8 @@ def afficher_statistiques(data):
     st.write("Nombre de lignes :", data.shape[0])
     st.write("Nombre de variables :", data.shape[1])
     st.write("Plus de statistiques:",data.describe())
-    st.write("Plus d'informations:",data.info())
+    st.write("Plus d'informations:")
+    st.write(data.info())
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
 def afficher_boites_a_moustaches(data):
@@ -219,10 +220,10 @@ if __name__ == "__main__":
 
 st.markdown("Réalisé avec💖par Robert ")  
     
-hide_streamlit_style = """
+'''hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)'''
