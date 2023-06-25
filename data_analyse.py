@@ -43,6 +43,7 @@ def afficher_statistiques(data):
     st.write("Nombre de lignes :", data.shape[0])
     st.write("Nombre de variables :", data.shape[1])
     st.write("Plus de statistiques:",data.describe())
+    st.write("Plus d'informations:",data.info())
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
 def afficher_boites_a_moustaches(data):
@@ -112,31 +113,38 @@ def page_accueil():
         fichier = st.file_uploader("Sélectionner un fichier", type=["xlsx", "xls", "csv", "txt"])
         
         if fichier is not None:
-            data = charger_base_de_donnees(fichier)
-            
-            # Affichage de la base de données initiale
-            st.subheader("Base de données initiale")
-            st.write(data.head())
+            try:
+                data = charger_base_de_donnees(fichier)
+                
+                # Affichage de la base de données initiale
+                st.subheader("Base de données initiale")
+                st.write(data)
+                st.write("l'entête de la base de données:")
+                st.write(data.head())
+            except Exception as e:
+                st.error("Veuillez sélectionner des données tabulaires : {}".format(str(e)))
             
             # Supprimer des colonnes
-            st.subheader("Supprimer des variables")
-            selected_columns = st.multiselect("Sélectionner les variables à supprimer", data.columns)
+            st.subheader("Eliminer des variables")
+            selected_columns = st.multiselect("Sélectionner les variables à éliminer", data.columns)
             data = data.drop(columns=selected_columns)
             
             # Affichage des statistiques initiales
             afficher_statistiques(data)
             
             # Nettoyage des données aberrantes
-            if st.button("Supprimer les données aberrantes"):
+            if st.button("Les valeurs aberrantes"):
                 data = nettoyer_donnees_aberrantes(data)
                 st.write("Nombre de données aberrantes :", data.isnull().sum())
             
             # Nettoyage des valeurs manquantes
-            st.subheader("Nettoyage des valeurs manquantes")
-            nettoyage_method = st.selectbox("Méthode de nettoyage", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
+            st.subheader("traitement des valeurs manquantes")
+            nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
             if nettoyage_method != "Supprimer":
                 data = nettoyer_donnees_manquantes(data, nettoyage_method)
-                st.write("Nombre de valeurs manquantes :", data.isnull().sum())
+                st.write("Nombre de valeurs manquantes après traitement:", data.isnull().sum())
+            else:
+                st.write("Nombre de valeurs manquantes après traitement :", data.isnull().sum())
             
             # Affichage de la base de données résultante
             st.subheader("Base de données résultante")
@@ -147,13 +155,14 @@ def page_accueil():
     elif option == "Utiliser une base de données en ligne":
         base_donnees_en_ligne = st.radio("Choisir une base de données en ligne", ("Données commerciales",))
         if base_donnees_en_ligne == "Données commerciales":
-            # Charger la base de données en ligne (exemple avec Usgaz)
+            # Charger la base de données en ligne (exemple avec base Commerciale)
             url = "https://raw.githubusercontent.com/robertmessan/lunettes_parlantes/main/data_bd.csv"  # Remplacer l'URL par l'URL réelle de la base de données en ligne
             try:
                 data = charger_base_de_donnees_en_ligne(url)
                 st.subheader("Base de données initiale :")
                 st.write(data)
-
+                st.write("l'entête de la base de données:")
+                st.write(data.head())
                 # Reste du code pour le nettoyage des données et la création des tableaux de bord
 
             except Exception as e:
@@ -164,8 +173,8 @@ def page_accueil():
             #st.write(data.head())
             
             # Supprimer des colonnes
-            st.subheader("Supprimer des colonnes")
-            selected_columns = st.multiselect("Sélectionner les variables à supprimer", data.columns)
+            st.subheader("Eliminer des colonnes")
+            selected_columns = st.multiselect("Sélectionner les variables à éliminer", data.columns)
             data = data.drop(columns=selected_columns)
             
             # Affichage des statistiques initiales
@@ -182,7 +191,8 @@ def page_accueil():
             if nettoyage_method != "Supprimer":
                 data = nettoyer_donnees_manquantes(data, nettoyage_method)
                 st.write("Nombre de valeurs manquantes :", data.isnull().sum().sum())
-            
+            else:
+                st.write("Nombre de valeurs manquantes :", data.isnull().sum().sum())
             # Affichage de la base de données résultante
             st.subheader("Base de données résultante")
             st.write(data)
@@ -211,7 +221,8 @@ st.markdown("Réalisé avec💖par Robert ")
     
 hide_streamlit_style = """
             <style>
-            #MainMenu {visibility: hidden;}
+            #MainMenu 
+            {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
