@@ -143,7 +143,7 @@ def page_accueil():
                 st.write("Nombre de données aberrantes :", data.isnull().sum())
             
             # Nettoyage des valeurs manquantes
-            st.subheader("traitement des valeurs manquantes")
+            st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
             try:
                 nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
                 if nettoyage_method != "Supprimer":
@@ -156,7 +156,7 @@ def page_accueil():
             # Affichage de la base de données résultante
 
             try:
-                st.subheader("Base de données résultante")
+                st.markdown('<h2 style="color: blue;">Base de données résultante</h2>', unsafe_allow_html=True)
                 st.write(data)
                 return data
             except Exception as e:
@@ -197,15 +197,15 @@ def page_accueil():
                 st.write("Nombre de données aberrantes après traitement :", data.isnull().sum())
             
             # Nettoyage des valeurs manquantes
-            st.subheader("Nettoyage des valeurs manquantes")
-            nettoyage_method = st.selectbox("Méthode de nettoyage", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
+            st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
+            nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
             if nettoyage_method != "Supprimer":
                 data = nettoyer_donnees_manquantes(data, nettoyage_method)
                 st.write("Nombre de valeurs manquantes :", data.isnull().sum())
             else:
                 st.write("Nombre de valeurs manquantes :", data.isnull().sum())
-            # Affichage de la base de données résultante
             st.subheader("Base de données résultante")
+            st.markdown('<h2 style="color: blue;">Base de données résultante</h2>', unsafe_allow_html=True)
             st.write(data)
             
             return data
