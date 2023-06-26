@@ -4,4 +4,6 @@ frontend==0.0.3
 pandas==1.4.2
 openpyxl==3.0.7
 matplotlib==3.4.3
+base64==0.5.1
+xlsxwriter==3.0.1
 ipython
