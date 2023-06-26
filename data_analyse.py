@@ -131,7 +131,7 @@ def page_accueil():
             
             # Supprimer des colonnes
             try:
-                st.subheader("Les statistiques de la base de données initiale")
+                st.markdown('<h2 style="color: green;">Les statistiques de la base de données initiale</h2>', unsafe_allow_html=True)
                 afficher_statistiques(data)
                 # Supprimer des colonnes
                 st.subheader("Supprimer des colonnes")
@@ -158,7 +158,7 @@ def page_accueil():
                     data = data.drop(index=data.index[start_index:end_index])
                 
                 # Affichage des statistiques initiales
-                st.subheader("Les statistiques de la base de données transformée")
+                st.markdown('<h2 style="color: green;">Les statistiques de la base de données transformée</h2>', unsafe_allow_html=True)
                 afficher_statistiques(data)
             
                 # Nettoyage des données aberrantes
@@ -210,7 +210,7 @@ def page_accueil():
             #st.write(data.head())
             
             # Supprimer des colonnes
-            st.subheader("Les statistiques de la base de données initiale")
+            st.markdown('<h2 style="color: green;">Les statistiques de la base de données initiale</h2>', unsafe_allow_html=True)
             afficher_statistiques(data)
             # Supprimer des colonnes
             st.subheader("Supprimer des colonnes")
@@ -237,7 +237,7 @@ def page_accueil():
                 data = data.drop(index=data.index[start_index:end_index])
             
             # Affichage des statistiques initiales
-            st.subheader("Les statistiques de la base de données transformée")
+            st.markdown('<h2 style="color: green;">Les statistiques de la base de données transformée</h2>', unsafe_allow_html=True)
             afficher_statistiques(data)
             
             # Nettoyage des données aberrantes
