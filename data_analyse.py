@@ -37,7 +37,6 @@ def nettoyer_donnees_manquantes(data, method):
 
 # Fonction pour afficher les statistiques des données
 def afficher_statistiques(data):
-    st.subheader("Statistiques des données")
     st.write("Nombre de valeurs manquantes :", data.isnull().sum())
     st.write("Moyenne :", data.mean())
     st.write("Médiane :", data.median())
@@ -132,11 +131,34 @@ def page_accueil():
             
             # Supprimer des colonnes
             try:
-                st.subheader("Eliminer des variables")
-                selected_columns = st.multiselect("Sélectionner les variables à éliminer", data.columns)
+                st.subheader("Les statistiques de la base de données initiale")
+                afficher_statistiques(data)
+                # Supprimer des colonnes
+                st.subheader("Supprimer des colonnes")
+                selected_columns = st.multiselect("Sélectionner les variables à supprimer", data.columns)
                 data = data.drop(columns=selected_columns)
+    
+                # Suppression de lignes sélectionnées
+                st.subheader("Éliminer des lignes sélectionnées")
+                selected_rows = st.multiselect("Sélectionner les lignes à éliminer", data.index)
+                data = data.drop(index=selected_rows)
+    
+                # Suppression d'un nombre précis de lignes
+                st.subheader("Éliminer un nombre précis de lignes")
+                delete_option = st.selectbox("Sélectionner l'option de suppression", ["Au début", "À la fin", "Au milieu"])
+                num_rows = st.number_input("Nombre de lignes à supprimer", min_value=0, max_value=len(data), step=1)
+    
+                if delete_option == "Au début":
+                    data = data.iloc[num_rows:]
+                elif delete_option == "À la fin":
+                    data = data.iloc[:-num_rows]
+                elif delete_option == "Au milieu":
+                    start_index = len(data) // 2 - num_rows // 2
+                    end_index = start_index + num_rows
+                    data = data.drop(index=data.index[start_index:end_index])
                 
                 # Affichage des statistiques initiales
+                st.subheader("Les statistiques de la base de données transformée")
                 afficher_statistiques(data)
             
                 # Nettoyage des données aberrantes
@@ -188,11 +210,34 @@ def page_accueil():
             #st.write(data.head())
             
             # Supprimer des colonnes
-            st.subheader("Eliminer des colonnes")
-            selected_columns = st.multiselect("Sélectionner les variables à éliminer", data.columns)
+            st.subheader("Les statistiques de la base de données initiale")
+            afficher_statistiques(data)
+            # Supprimer des colonnes
+            st.subheader("Supprimer des colonnes")
+            selected_columns = st.multiselect("Sélectionner les variables à supprimer", data.columns)
             data = data.drop(columns=selected_columns)
+
+            # Suppression de lignes sélectionnées
+            st.subheader("Éliminer des lignes sélectionnées")
+            selected_rows = st.multiselect("Sélectionner les lignes à éliminer", data.index)
+            data = data.drop(index=selected_rows)
+
+            # Suppression d'un nombre précis de lignes
+            st.subheader("Éliminer un nombre précis de lignes")
+            delete_option = st.selectbox("Sélectionner l'option de suppression", ["Au début", "À la fin", "Au milieu"])
+            num_rows = st.number_input("Nombre de lignes à supprimer", min_value=0, max_value=len(data), step=1)
+
+            if delete_option == "Au début":
+                data = data.iloc[num_rows:]
+            elif delete_option == "À la fin":
+                data = data.iloc[:-num_rows]
+            elif delete_option == "Au milieu":
+                start_index = len(data) // 2 - num_rows // 2
+                end_index = start_index + num_rows
+                data = data.drop(index=data.index[start_index:end_index])
             
             # Affichage des statistiques initiales
+            st.subheader("Les statistiques de la base de données transformée")
             afficher_statistiques(data)
             
             # Nettoyage des données aberrantes
