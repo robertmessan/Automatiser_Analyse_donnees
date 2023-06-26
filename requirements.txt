@@ -2,5 +2,6 @@ requests==2.25.1
 streamlit==1.21.0
 frontend==0.0.3
 pandas==1.4.2
+openpyxl==3.0.7
 matplotlib==3.4.3
 ipython
