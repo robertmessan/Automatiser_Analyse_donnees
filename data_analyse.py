@@ -114,7 +114,7 @@ def page_accueil():
     option = st.radio("Choisir une option", ("Charger une base de données locale", "Utiliser une base de données en ligne"))
     
     if option == "Charger une base de données locale":
-        fichier = st.file_uploader("Sélectionner un fichier", type=["xlsx", "xls", "csv", "txt"])
+        fichier = st.file_uploader("Sélectionner un fichier(tabulaire)", type=["xlsx", "xls", "csv", "txt"])
         
         if fichier is not None:
             try:
