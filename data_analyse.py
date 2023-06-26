@@ -138,13 +138,13 @@ def page_accueil():
                 
                 # Affichage des statistiques initiales
                 afficher_statistiques(data)
+            
+                # Nettoyage des données aberrantes
+                if st.button("Supprimer les valeurs aberrantes"):
+                    data = nettoyer_donnees_aberrantes(data)
+                    st.write("Nombre de données aberrantes :", data.isnull().sum())
             except Exception as e:
                 st.error("Les données n'ont pas été correctement chargées : {}".format(str(e)))
-            # Nettoyage des données aberrantes
-            if st.button("Supprimer les valeurs aberrantes"):
-                data = nettoyer_donnees_aberrantes(data)
-                st.write("Nombre de données aberrantes :", data.isnull().sum())
-            
             # Nettoyage des valeurs manquantes
             st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
             try:
