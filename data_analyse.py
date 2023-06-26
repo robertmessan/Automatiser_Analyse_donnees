@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import requests
 from io import StringIO
+import io
+import base64
 import time
 
 # Fonction pour charger une base de données à partir d'un fichier
@@ -184,6 +186,36 @@ def page_accueil():
             try:
                 st.markdown('<h2 style="color: blue;">Base de données résultante</h2>', unsafe_allow_html=True)
                 st.write(data)
+                    # Téléchargement de la base de données résultante
+                download_format = st.selectbox("Sélectionner le format de téléchargement", ["CSV", "XLSX", "XLS", "TXT"])
+                if st.button("Télécharger la base de données"):
+                    if download_format == "CSV":
+                        csv_data = data.to_csv(index=False)
+                        file_extension = "csv"
+                    elif download_format == "XLSX":
+                        excel_data = io.BytesIO()
+                        with pd.ExcelWriter(excel_data, engine="xlsxwriter") as writer:
+                            data.to_excel(writer, index=False)
+                        excel_data.seek(0)
+                        file_extension = "xlsx"
+                    elif download_format == "XLS":
+                        excel_data = io.BytesIO()
+                        with pd.ExcelWriter(excel_data, engine="openpyxl") as writer:
+                            data.to_excel(writer, index=False)
+                        excel_data.seek(0)
+                        file_extension = "xls"
+                    elif download_format == "TXT":
+                        csv_data = data.to_csv(index=False, sep="\t")
+                        file_extension = "txt"
+    
+                    if download_format in ["CSV", "TXT"]:
+                        b64 = base64.b64encode(csv_data.encode()).decode()
+                    else:
+                        b64 = base64.b64encode(excel_data.read()).decode()
+                        excel_data.close()
+    
+                    href = f'<a href="data:file/{file_extension};base64,{b64}" download="resultat.{file_extension}">Obtenir</a>'
+                    st.markdown(href, unsafe_allow_html=True)
                 return data
             except Exception as e:
                 st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))   
