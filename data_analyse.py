@@ -22,7 +22,7 @@ def nettoyer_donnees_aberrantes(data):
     Q1 = data.quantile(0.25)
     Q3 = data.quantile(0.75)
     IQR = Q3 - Q1
-    data = data[~((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).any(axis=1)]
+    data = data[~((data < (Q1 - 1.5 * IQR)) or (data > (Q3 + 1.5 * IQR))).any(axis=1)]
     return data
 
 # Fonction pour effectuer le nettoyage des données (valeurs manquantes)
@@ -153,6 +153,7 @@ def page_accueil():
                     data = nettoyer_donnees_manquantes(data, nettoyage_method)
                     st.write("Nombre de valeurs manquantes après traitement:", data.isnull().sum())
                 else:
+                    data = nettoyer_donnees_manquantes(data, nettoyage_method)
                     st.write("Nombre de valeurs manquantes après traitement :", data.isnull().sum())
             except Exception as e:
                 st.error("Que des données tabulaire: {}".format(str(e)))
