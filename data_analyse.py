@@ -29,9 +29,9 @@ def nettoyer_donnees_aberrantes(data):
 def nettoyer_donnees_manquantes(data, method):
     if method == "Supprimer":
         data = data.dropna()
-    elif method == "Médiane":
+    elif method == "Remplir avec la médiane":
         data = data.fillna(data.median())
-    elif method == "Moyenne":
+    elif method == "Remplir avec la moyenne":
         data = data.fillna(data.mean())
     return data
 
