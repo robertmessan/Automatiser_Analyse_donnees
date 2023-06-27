@@ -215,6 +215,7 @@ def page_accueil():
                 # Bouton pour déclencher la modification
                 if st.button("Renommer les noms de colonnes"):
                     data=data_editable
+                    st.markdown('<h2 style="color: green;">Base de données avec colonnes renommées</h2>', unsafe_allow_html=True)
                     st.write(data_editable)
                     # Téléchargement de la base de données résultante
                 download_format = st.selectbox("Sélectionner le format de téléchargement", ["CSV", "XLSX", "XLS", "TXT"])
