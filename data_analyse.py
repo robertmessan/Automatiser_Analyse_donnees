@@ -13,7 +13,15 @@ def charger_base_de_donnees(fichier):
     if extension.lower() in ["xlsx", "xls"]:
         return pd.read_excel(fichier)
     elif extension.lower() == "csv":
-        return pd.read_csv(fichier)
+        fichier.seek(0)  # Remettre le curseur au début du fichier
+        premiere_ligne = fichier.readline().decode().strip()  # Lire et décoder la première ligne
+        if premiere_ligne == "":
+            raise pd.errors.EmptyDataError("Fichier vide!")
+        delimiter = ","
+        if ";" in premiere_ligne:
+            delimiter = ";"
+        fichier.seek(0)  # Remettre le curseur au début du fichier
+        return pd.read_csv(fichier, delimiter=delimiter)
     elif extension.lower() == "txt":
         return pd.read_table(fichier, delimiter="\s+")
     else:
