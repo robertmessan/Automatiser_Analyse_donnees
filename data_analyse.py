@@ -191,7 +191,7 @@ def page_accueil():
                     data = nettoyer_donnees_manquantes(data, nettoyage_method)
                     st.write("Nombre de valeurs manquantes après traitement :", data.isnull().sum())
             except Exception as e:
-                st.error("Que des données tabulaire: {}".format(str(e)))
+                st.error("Veuillez vous assurer que la structure de votre bd est la bonne!")
             # Affichage de la base de données résultante
 
             try:
@@ -261,7 +261,7 @@ def page_accueil():
                     data=data_editable
                 return data
             except Exception as e:
-                st.error("Merci de recharger une base de données tabulaire: ")   
+                st.error("Merci de recharger une base de données tabulaire! ")   
     elif option == "Utiliser une base de données en ligne":
         base_donnees_en_ligne = st.radio("Nous vous proposons cette base de données synthétique:", ("Données commerciales",))
         if base_donnees_en_ligne == "Données commerciales":
