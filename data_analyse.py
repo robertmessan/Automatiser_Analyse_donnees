@@ -261,7 +261,7 @@ def page_accueil():
                     data=data_editable
                 return data
             except Exception as e:
-                st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))   
+                st.error("Merci de recharger une base de données tabulaire: ")   
     elif option == "Utiliser une base de données en ligne":
         base_donnees_en_ligne = st.radio("Nous vous proposons cette base de données synthétique:", ("Données commerciales",))
         if base_donnees_en_ligne == "Données commerciales":
@@ -278,7 +278,7 @@ def page_accueil():
                 # Reste du code pour le nettoyage des données et la création des tableaux de bord
 
             except Exception as e:
-                st.error("Erreur lors du chargement de la base de données : {}".format(str(e)))
+                st.error("Erreur lors du chargement de la base de données .")
             
             # Affichage de la base de données initiale
             #st.subheader("Base de données initiale")
