@@ -213,7 +213,7 @@ def page_accueil():
                 data_editable.columns = noms_colonnes_modifies
     
                 # Bouton pour déclencher la modification
-                if st.button("Renommer les noms de colonnes"):
+                if st.button("Renommer les colonnes"):
                     st.markdown('<h2 style="color: green;">Base de données avec colonnes renommées</h2>', unsafe_allow_html=True)
                     st.write(data_editable)
                     data=data_editable
