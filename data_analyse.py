@@ -214,29 +214,29 @@ def page_accueil():
     
                 # Bouton pour déclencher la modification
                 if st.button("Renommer les noms de colonnes"):
-                    data=data_editable
                     st.markdown('<h2 style="color: green;">Base de données avec colonnes renommées</h2>', unsafe_allow_html=True)
                     st.write(data_editable)
+                    data=data_editable
                     # Téléchargement de la base de données résultante
                 download_format = st.selectbox("Sélectionner le format de téléchargement", ["CSV", "XLSX", "XLS", "TXT"])
                 if st.button("Télécharger la base de données"):
                     if download_format == "CSV":
-                        csv_data = data.to_csv(index=False)
+                        csv_data = data_editable.to_csv(index=False)
                         file_extension = "csv"
                     elif download_format == "XLSX":
                         excel_data = io.BytesIO()
                         with pd.ExcelWriter(excel_data, engine="xlsxwriter") as writer:
-                            data.to_excel(writer, index=False)
+                            data_editable.to_excel(writer, index=False)
                         excel_data.seek(0)
                         file_extension = "xlsx"
                     elif download_format == "XLS":
                         excel_data = io.BytesIO()
                         with pd.ExcelWriter(excel_data, engine="openpyxl") as writer:
-                            data.to_excel(writer, index=False)
+                            data_editable.to_excel(writer, index=False)
                         excel_data.seek(0)
                         file_extension = "xls"
                     elif download_format == "TXT":
-                        csv_data = data.to_csv(index=False, sep="\t")
+                        csv_data = data_editable.to_csv(index=False, sep="\t")
                         file_extension = "txt"
     
                     if download_format in ["CSV", "TXT"]:
@@ -247,6 +247,7 @@ def page_accueil():
     
                     href = f'<a href="data:file/{file_extension};base64,{b64}" download="resultat.{file_extension}">Obtenir</a>'
                     st.markdown(href, unsafe_allow_html=True)
+                    data=data_editable
                 return data
             except Exception as e:
                 st.error("Merci de recharger une base de données tabulaire: {}".format(str(e)))   
