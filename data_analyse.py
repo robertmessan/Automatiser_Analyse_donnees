@@ -35,7 +35,7 @@ def nettoyer_donnees_aberrantes(data):
     outliers = ((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).any(axis=1)
     data = data[~((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).any(axis=1)]
     aberrant_data = data[outliers]
-    num_aberrant_values = aberrant_data.shape[0]
+    num_aberrant_values = aberrant_data.sum(axis=0)
     st.header('Nombre de valeurs aberrantes')
     st.write(num_aberrant_values)
     return data
