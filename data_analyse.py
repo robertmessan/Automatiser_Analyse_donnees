@@ -134,7 +134,7 @@ def page_accueil():
                 st.write(data)
                 st.markdown('<h2 style="color: blue;">les premières lignes de la base de données:</h2>', unsafe_allow_html=True)
                 st.write(data.head())
-                st.markdown('<h2 style="color: blue;">les premières lignes de la base de données:</h2>', unsafe_allow_html=True)
+                st.markdown('<h2 style="color: blue;">les dernières lignes de la base de données:</h2>', unsafe_allow_html=True)
                 st.write(data.tail())
             except Exception as e:
                 st.error("Veuillez sélectionner des données tabulaires : {}".format(str(e)))
