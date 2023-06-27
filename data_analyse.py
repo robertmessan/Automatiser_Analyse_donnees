@@ -186,6 +186,36 @@ def page_accueil():
             try:
                 st.markdown('<h2 style="color: blue;">Base de données résultante</h2>', unsafe_allow_html=True)
                 st.write(data)
+                #renommer des colonnes
+                st.subheader("Renommer les noms des colonnes")
+                st.markdown('<span style="color: blue;">Attention!, assurez-vous que cela ne causera pas de problème d'intégrité!</span>', unsafe_allow_html=True)
+                colonnes_a_modifier = st.multiselect("Sélectionnez les colonnes à renommer", data.columns.tolist())
+    
+                # Affichage de la base de données dans un tableau interactif avec les noms de colonnes modifiables
+                data_editable = data.copy()
+    
+                # Création d'une liste pour stocker les nouveaux noms de colonnes
+                noms_colonnes_modifies = data_editable.columns.tolist()
+    
+                # Création d'un dictionnaire pour stocker les éléments interactifs (input) associés aux colonnes
+                input_elements = {}
+    
+                # Affichage de la base de données dans un tableau interactif avec des noms de colonnes modifiables
+                for colonne in data_editable.columns:
+                    if colonne in colonnes_a_modifier:
+                        input_elements[colonne] = st.empty()
+                        input_value = input_elements[colonne].text_input(colonne, value=colonne, key=colonne)
+                        
+                        # Mise à jour du nouveau nom de colonne dans la liste
+                        noms_colonnes_modifies[data_editable.columns.get_loc(colonne)] = input_value
+    
+                # Renommer les colonnes avec les nouveaux noms
+                data_editable.columns = noms_colonnes_modifies
+    
+                # Bouton pour déclencher la modification
+                if st.button("Renommer les noms de colonnes"):
+                    data=data_editable
+                    st.write(data_editable)
                     # Téléchargement de la base de données résultante
                 download_format = st.selectbox("Sélectionner le format de téléchargement", ["CSV", "XLSX", "XLS", "TXT"])
                 if st.button("Télécharger la base de données"):
