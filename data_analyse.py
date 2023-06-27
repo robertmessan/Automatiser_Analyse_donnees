@@ -315,7 +315,7 @@ for i in range(len(phrase)):
     time.sleep(0.01)
 
 st.markdown('<h2 style="color: purple;">Si vous avez des propositions, n\'hésitez surtout pas. Envoyez moi un petit message sympa😊 et je vous réponds!</h2>', unsafe_allow_html=True)
-st.markdown("[L'auteur:](https://www.linkedin.com/in/kossi-robert-messan-252954223/)")
+st.markdown("[Mon profil](https://www.linkedin.com/in/kossi-robert-messan-252954223/)")
 hide_streamlit_style = """
             <style>
             MainMenu {visibility: hidden;}
