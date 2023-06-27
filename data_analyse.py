@@ -188,7 +188,7 @@ def page_accueil():
                 st.write(data)
                 #renommer des colonnes
                 st.subheader("Renommer les noms des colonnes")
-                st.markdown('<span style="color: blue;">Attention!, assurez-vous que cela ne causera pas de problème d'intégrité!</span>', unsafe_allow_html=True)
+                st.markdown('<span style="color: blue;">Attention!, assurez-vous que cela ne causera pas de problème d\'intégrité!</span>', unsafe_allow_html=True)
                 colonnes_a_modifier = st.multiselect("Sélectionnez les colonnes à renommer", data.columns.tolist())
     
                 # Affichage de la base de données dans un tableau interactif avec les noms de colonnes modifiables
