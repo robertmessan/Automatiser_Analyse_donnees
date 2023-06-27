@@ -68,7 +68,7 @@ def afficher_boites_a_moustaches(data):
         try:
             data[selected_columns].boxplot()
             st.pyplot(fig)
-        Exception as e:
+        except Exception as e:
             st.error("Au moins une variable doit être numérique")
     elif len(selected_columns) == 1:
         column = selected_columns[0]
