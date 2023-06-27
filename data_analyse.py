@@ -32,7 +32,12 @@ def nettoyer_donnees_aberrantes(data):
     Q1 = data.quantile(0.25)
     Q3 = data.quantile(0.75)
     IQR = Q3 - Q1
+    outliers = ((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).any(axis=1)
     data = data[~((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).any(axis=1)]
+    aberrant_data = data[outliers]
+    num_aberrant_values = aberrant_data.shape[0]
+    st.header('Nombre de valeurs aberrantes')
+    st.write(num_aberrant_values)
     return data
 
 # Fonction pour effectuer le nettoyage des données (valeurs manquantes)
@@ -177,7 +182,7 @@ def page_accueil():
                 # Nettoyage des données aberrantes
                 if st.button("Supprimer les valeurs aberrantes"):
                     data = nettoyer_donnees_aberrantes(data)
-                    st.write("Nombre de données aberrantes :", data.isnull().sum())
+                    
             except Exception as e:
                 st.error("Les données n'ont pas été correctement chargées.")
             # Nettoyage des valeurs manquantes
