@@ -65,8 +65,11 @@ def afficher_boites_a_moustaches(data):
     
     if len(selected_columns) >= 2:
         fig, ax = plt.subplots()
-        data[selected_columns].boxplot()
-        st.pyplot(fig)
+        try:
+            data[selected_columns].boxplot()
+            st.pyplot(fig)
+        Exception as e:
+            st.error("Au moins une variable doit être numérique")
     elif len(selected_columns) == 1:
         column = selected_columns[0]
         if data[column].dtype != "object":
@@ -77,7 +80,7 @@ def afficher_boites_a_moustaches(data):
         else:
             st.write("La variable sélectionnée ne contient pas de données numériques.")
     else:
-        st.write("veuillez sélectionner au moins une variable")
+        st.write("veuillez sélectionner au moins une variable numérique")
 
 # Fonction pour créer les tableaux de bord
 def creer_tableaux_de_bord(data):
@@ -176,7 +179,7 @@ def page_accueil():
                     data = nettoyer_donnees_aberrantes(data)
                     st.write("Nombre de données aberrantes :", data.isnull().sum())
             except Exception as e:
-                st.error("Les données n'ont pas été correctement chargées : {}".format(str(e)))
+                st.error("Les données n'ont pas été correctement chargées.")
             # Nettoyage des valeurs manquantes
             st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
             try:
