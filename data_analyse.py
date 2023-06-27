@@ -15,7 +15,7 @@ def charger_base_de_donnees(fichier):
     elif extension.lower() == "csv":
         return pd.read_csv(fichier)
     elif extension.lower() == "txt":
-        return pd.read_csv(fichier, delimiter="\t")
+        return pd.read_table(fichier, delimiter="\s+")
     else:
         raise ValueError("Format de fichier non pris en charge.")
 
