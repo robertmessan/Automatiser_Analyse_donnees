@@ -26,6 +26,25 @@ def charger_base_de_donnees(fichier):
         return pd.read_table(fichier, delimiter="\s+")
     else:
         raise ValueError("Format de fichier non pris en charge.")
+#fonction pour convertir le type des variables
+def convert_column_type(columns, new_types, data):
+    try:
+        for column, new_type in zip(columns, new_types):
+            if new_type == 'flottant':
+                data[column] = data[column].astype(float)
+            elif new_type == 'entier':
+                data[column] = data[column].astype(int)
+            elif new_type == 'double':
+                data[column] = data[column].astype(float)
+            elif new_type == 'chaine_caractère':
+                data[column] = data[column].astype(str)
+            elif new_type == 'date':
+                data[column] = pd.to_datetime(data[column])
+            elif new_type == 'booléen':
+                data[column] = data[column].astype(bool)
+    except ValueError:
+        st.error("Impossible de convertir la colonnes. Assurez-vous que toutes les valeurs sont dans des formats compatibles.")
+    return data
 
 # Fonction pour effectuer le nettoyage des données (valeurs aberrantes)
 def nettoyer_donnees_aberrantes(data):
@@ -174,8 +193,21 @@ def page_accueil():
                     start_index = len(data) // 2 - num_rows // 2
                     end_index = start_index + num_rows
                     data = data.drop(index=data.index[start_index:end_index])
-                
-                # Affichage des statistiques initiales
+                    #convertir les types des colonnes
+                    st.subheader("Transformer les types des colonnes:")
+                    st.markdown('<h3 style="color: red;">Transformer les types des colonnes:</h3>', unsafe_allow_html=True)
+                    st.markdown('<span style="color: red;">Assurez-vous que les valeurs de la colonnes correspondent bien au type choisi</span>', unsafe_allow_html=True)
+                    selected_columns = st.multiselect("Sélectionner les colonnes à convertir", data.columns, key="select_columns")
+        
+                    # Sélectionner les nouveaux types pour chaque colonne
+                    new_types = []
+                    for column in selected_columns:
+                        new_type = st.selectbox(f"Sélectionner le nouveau type pour la colonne {column}", ["flottant", "entier", "double", "chaine_caractère", "date", "booléen"], key=f"select_type_{column}")
+                        new_types.append(new_type)
+        
+                    # Convertir les colonnes
+                    data = convert_column_type(selected_columns, new_types, data)                
+                # Affichage des statistiques transformées
                 st.markdown('<h2 style="color: green;">Les statistiques de la base de données transformée</h2>', unsafe_allow_html=True)
                 afficher_statistiques(data)
             
