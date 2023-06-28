@@ -80,14 +80,7 @@ def afficher_statistiques(data):
     st.write("nombre de doublons sur les colonnes:",data.shape[1]-len(data.nunique()))
     st.write("Plus de statistiques:",data.describe())
     st.write("Plus d'informations:")
-    type_map = {
-    'float64': 'float',
-    'int64': 'int',
-    'object': 'string',
-    'datetime64[ns]': 'date',
-    'bool': 'bool'
-    }
-    st.write(data.dtypes.map(type_map))
+    st.write(data.dtypes)
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
 def afficher_boites_a_moustaches(data):
