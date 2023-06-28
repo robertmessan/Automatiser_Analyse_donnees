@@ -78,9 +78,9 @@ def afficher_statistiques(data):
     st.write("Nombre de variables :", data.shape[1])
     st.write("nombre de doublons sur les lignes:",data.shape[0]-len(data.drop_duplicates()))
     st.write("nombre de doublons sur les colonnes:",data.shape[1]-len(data.nunique()))
-    st.write("Plus de statistiques:",data.describe(include='all'))
+    st.write("Plus de statistiques:",data.describe())
     st.write("Plus d'informations:")
-    st.write(data.dtypes)
+    st.write(data.info())
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
 def afficher_boites_a_moustaches(data):
