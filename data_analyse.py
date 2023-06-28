@@ -193,19 +193,19 @@ def page_accueil():
                     start_index = len(data) // 2 - num_rows // 2
                     end_index = start_index + num_rows
                     data = data.drop(index=data.index[start_index:end_index])
-                    #convertir les types des colonnes
-                    st.markdown('<h2 style="color: blue;">Transformer les types des colonnes:</h2>', unsafe_allow_html=True)
-                    st.markdown('<span style="color: red;">Assurez-vous que les valeurs de la colonnes correspondent bien au type choisi</span>', unsafe_allow_html=True)
-                    selected_columns = st.multiselect("Sélectionner les colonnes à convertir", data.columns, key="select_columns")
+                #convertir les types des colonnes
+                st.markdown('<h2 style="color: blue;">Transformer les types des colonnes:</h2>', unsafe_allow_html=True)
+                st.markdown('<span style="color: red;">Assurez-vous que les valeurs de la colonnes correspondent bien au type choisi</span>', unsafe_allow_html=True)
+                selected_columns = st.multiselect("Sélectionner les colonnes à convertir", data.columns, key="select_columns")
         
-                    # Sélectionner les nouveaux types pour chaque colonne
-                    new_types = []
-                    for column in selected_columns:
-                        new_type = st.selectbox(f"Sélectionner le nouveau type pour la colonne {column}", ["flottant", "entier", "double", "chaine_caractère", "date", "booléen"], key=f"select_type_{column}")
-                        new_types.append(new_type)
+                # Sélectionner les nouveaux types pour chaque colonne
+                new_types = []
+                for column in selected_columns:
+                    new_type = st.selectbox(f"Sélectionner le nouveau type pour la colonne {column}", ["flottant", "entier", "double", "chaine_caractère", "date", "booléen"], key=f"select_type_{column}")
+                    new_types.append(new_type)
         
-                    # Convertir les colonnes
-                    data = convert_column_type(selected_columns, new_types, data)                
+                # Convertir les colonnes
+                data = convert_column_type(selected_columns, new_types, data)                
                 # Affichage des statistiques transformées
                 st.markdown('<h2 style="color: green;">Les statistiques de la base de données transformée</h2>', unsafe_allow_html=True)
                 afficher_statistiques(data)
