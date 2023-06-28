@@ -194,8 +194,7 @@ def page_accueil():
                     end_index = start_index + num_rows
                     data = data.drop(index=data.index[start_index:end_index])
                     #convertir les types des colonnes
-                    st.subheader("Transformer les types des colonnes:")
-                    st.markdown('<h3 style="color: red;">Transformer les types des colonnes:</h3>', unsafe_allow_html=True)
+                    st.markdown('<h2 style="color: blue;">Transformer les types des colonnes:</h2>', unsafe_allow_html=True)
                     st.markdown('<span style="color: red;">Assurez-vous que les valeurs de la colonnes correspondent bien au type choisi</span>', unsafe_allow_html=True)
                     selected_columns = st.multiselect("Sélectionner les colonnes à convertir", data.columns, key="select_columns")
         
