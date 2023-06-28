@@ -87,7 +87,7 @@ def afficher_statistiques(data):
     'datetime64[ns]': 'date',
     'bool': 'bool'
     }
-    st.write(data.dtypes.map(type_map)
+    st.write(data.dtypes.map(type_map))
 
 # Fonction pour afficher les boîtes à moustaches des colonnes
 def afficher_boites_a_moustaches(data):
