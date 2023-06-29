@@ -215,7 +215,7 @@ def page_accueil():
                     data = nettoyer_donnees_aberrantes(data)
                     
             except Exception as e:
-                st.error("Les données n'ont pas été correctement chargées.")
+                st.error("Un problème est survenu lors de la réalisation de cette opération.")
             # Nettoyage des valeurs manquantes
             st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
             try:
