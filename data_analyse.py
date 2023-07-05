@@ -51,14 +51,14 @@ def plot_missing_values(data):
     missing_values = missing_values[missing_values > 0]
     missing_values = missing_values.sort_values(ascending=False)
 
-    plt.figure(figsize=(10, 6))
-    plt.bar(missing_values.index, missing_values.values)
-    plt.xticks(rotation=45)
-    plt.xlabel('Colonnes')
-    plt.ylabel('Nombre de valeurs manquantes')
-    plt.title('Valeurs manquantes dans la base de données')
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.bar(missing_values.index, missing_values.values)
+    ax.set_xticklabels(missing_values.index, rotation=45)
+    ax.set_xlabel('Colonnes')
+    ax.set_ylabel('Nombre de valeurs manquantes')
+    ax.set_title('Valeurs manquantes dans la base de données')
     plt.tight_layout()
-    st.pyplot()
+    st.pyplot(fig)
 # Fonction pour effectuer le nettoyage des données (valeurs aberrantes)
 def nettoyer_donnees_aberrantes(data):
     Q1 = data.quantile(0.25)
