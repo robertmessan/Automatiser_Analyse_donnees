@@ -45,7 +45,20 @@ def convert_column_type(columns, new_types, data):
     except ValueError:
         st.error("Impossible de convertir la colonnes. Assurez-vous que toutes les valeurs sont dans des formats compatibles.")
     return data
+#Afficher les valeurs manquantes
+def plot_missing_values(data):
+    missing_values = data.isnull().sum()
+    missing_values = missing_values[missing_values > 0]
+    missing_values = missing_values.sort_values(ascending=False)
 
+    plt.figure(figsize=(10, 6))
+    plt.bar(missing_values.index, missing_values.values)
+    plt.xticks(rotation=45)
+    plt.xlabel('Colonnes')
+    plt.ylabel('Nombre de valeurs manquantes')
+    plt.title('Valeurs manquantes dans la base de données')
+    plt.tight_layout()
+    st.pyplot()
 # Fonction pour effectuer le nettoyage des données (valeurs aberrantes)
 def nettoyer_donnees_aberrantes(data):
     Q1 = data.quantile(0.25)
@@ -219,6 +232,8 @@ def page_accueil():
             # Nettoyage des valeurs manquantes
             st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
             try:
+                st.subheader("Graphique des valeurs manquantes")
+                plot_missing_values(data)
                 nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
                 if nettoyage_method != "Supprimer":
                     data = nettoyer_donnees_manquantes(data, nettoyage_method)
@@ -356,6 +371,8 @@ def page_accueil():
             
             # Nettoyage des valeurs manquantes
             st.markdown('<h2 style="color: blue;">traitement des valeurs manquantes</h2>', unsafe_allow_html=True)
+            st.subheader("Graphique des valeurs manquantes")
+            plot_missing_values(data)
             nettoyage_method = st.selectbox("Méthode de traitement", ("Supprimer", "Remplir avec la médiane", "Remplir avec la moyenne"))
             if nettoyage_method != "Supprimer":
                 data = nettoyer_donnees_manquantes(data, nettoyage_method)
