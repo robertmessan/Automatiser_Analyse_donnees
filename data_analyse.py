@@ -189,14 +189,14 @@ def page_accueil():
                 data = data.drop(columns=selected_columns)
     
                 # Suppression de lignes sélectionnées
-                st.subheader("Éliminer des lignes sélectionnées")
-                selected_rows = st.multiselect("Sélectionner les lignes à éliminer", data.index)
+                st.sidebar.subheader("Éliminer des lignes sélectionnées")
+                selected_rows = st.sidebar.multiselect("Sélectionner les lignes à éliminer", data.index)
                 data = data.drop(index=selected_rows)
     
                 # Suppression d'un nombre précis de lignes
-                st.subheader("Éliminer un nombre précis de lignes")
-                delete_option = st.selectbox("Sélectionner l'option de suppression", ["Au début", "À la fin", "Au milieu"])
-                num_rows = st.number_input("Nombre de lignes à supprimer", min_value=0, max_value=len(data), step=1)
+                st.sidebar.subheader("Éliminer un nombre précis de lignes")
+                delete_option = st.sidebar.selectbox("Sélectionner l'option de suppression", ["Au début", "À la fin", "Au milieu"])
+                num_rows = st.sidebar.number_input("Nombre de lignes à supprimer", min_value=0, max_value=len(data), step=1)
     
                 if delete_option == "Au début":
                     data = data.iloc[num_rows:]
@@ -207,14 +207,14 @@ def page_accueil():
                     end_index = start_index + num_rows
                     data = data.drop(index=data.index[start_index:end_index])
                 #convertir les types des colonnes
-                st.subheader("Transformer les types des colonnes:")
-                st.markdown('<span style="color: red;">Assurez-vous que les valeurs de la colonnes correspondent bien au type choisi</span>', unsafe_allow_html=True)
-                selected_columns = st.multiselect("Sélectionner les colonnes à convertir", data.columns, key="select_columns")
+                st.sidebar.subheader("Transformer les types des colonnes:")
+                st.sidebar.markdown('<span style="color: red;">Assurez-vous que les valeurs de la colonnes correspondent bien au type choisi</span>', unsafe_allow_html=True)
+                selected_columns = st.sidebar.multiselect("Sélectionner les colonnes à convertir", data.columns, key="select_columns")
         
                 # Sélectionner les nouveaux types pour chaque colonne
                 new_types = []
                 for column in selected_columns:
-                    new_type = st.selectbox(f"Sélectionner le nouveau type pour la colonne {column}", ["flottant", "entier", "double", "chaine_caractère", "date", "booléen"], key=f"select_type_{column}")
+                    new_type = st.sidebar.selectbox(f"Sélectionner le nouveau type pour la colonne {column}", ["flottant", "entier", "double", "chaine_caractère", "date", "booléen"], key=f"select_type_{column}")
                     new_types.append(new_type)
         
                 # Convertir les colonnes
@@ -249,9 +249,9 @@ def page_accueil():
                 st.markdown('<h2 style="color: blue;">Base de données résultante</h2>', unsafe_allow_html=True)
                 st.write(data)
                 #renommer des colonnes
-                st.subheader("Renommer les noms des colonnes")
-                st.markdown('<span style="color: red;">Attention!, assurez-vous que cela ne causera pas de problème d\'intégrité!</span>', unsafe_allow_html=True)
-                colonnes_a_modifier = st.multiselect("Sélectionnez les colonnes à renommer", data.columns.tolist())
+                st.sidebar.subheader("Renommer les noms des colonnes")
+                st.sidebar.markdown('<span style="color: red;">Attention!, assurez-vous que cela ne causera pas de problème d\'intégrité!</span>', unsafe_allow_html=True)
+                colonnes_a_modifier = st.sidebar.multiselect("Sélectionnez les colonnes à renommer", data.columns.tolist())
     
                 # Affichage de la base de données dans un tableau interactif avec les noms de colonnes modifiables
     
@@ -274,12 +274,12 @@ def page_accueil():
                 data.columns = noms_colonnes_modifies
     
                 # Bouton pour déclencher la modification
-                if st.button("Renommer les colonnes"):
+                if st.sidebar.button("Renommer les colonnes"):
                     st.markdown('<h2 style="color: green;">Base de données avec colonnes renommées</h2>', unsafe_allow_html=True)
                     st.write(data)
                     # Téléchargement de la base de données résultante
-                download_format = st.selectbox("Sélectionner le format de téléchargement", ["CSV", "XLSX", "XLS", "TXT"])
-                if st.button("Télécharger la base de données"):
+                download_format = st.sidebar.selectbox("Sélectionner le format de téléchargement", ["CSV", "XLSX", "XLS", "TXT"])
+                if st.sidebar.button("Télécharger la base de données"):
                     if download_format == "CSV":
                         csv_data = data_editable.to_csv(index=False)
                         file_extension = "csv"
