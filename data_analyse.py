@@ -184,8 +184,8 @@ def page_accueil():
                 st.markdown('<h2 style="color: green;">Les statistiques de la base de données initiale</h2>', unsafe_allow_html=True)
                 afficher_statistiques(data)
                 # Supprimer des colonnes
-                st.subheader("Supprimer des colonnes")
-                selected_columns = st.multiselect("Sélectionner les variables à supprimer", data.columns)
+                st.sidebar.subheader("Supprimer des colonnes")
+                selected_columns = st.sidebar.multiselect("Sélectionner les variables à supprimer", data.columns)
                 data = data.drop(columns=selected_columns)
     
                 # Suppression de lignes sélectionnées
