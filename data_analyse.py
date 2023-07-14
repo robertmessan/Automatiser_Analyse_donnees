@@ -306,7 +306,7 @@ def page_accueil():
                         excel_data.close()
     
                     href = f'<a href="data:file/{file_extension};base64,{b64}" download="resultat.{file_extension}">Obtenir</a>'
-                    st.markdown(href, unsafe_allow_html=True)
+                    st.sidebar.markdown(href, unsafe_allow_html=True)
                     data=data_editable
                 return data
             except Exception as e:
