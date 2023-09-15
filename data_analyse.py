@@ -253,8 +253,6 @@ def page_accueil():
                 st.sidebar.markdown('<span style="color: red;">Attention!, assurez-vous que cela ne causera pas de problème d\'intégrité!</span>', unsafe_allow_html=True)
                 colonnes_a_modifier = st.sidebar.multiselect("Sélectionnez les colonnes à renommer", data.columns.tolist())
     
-                # Affichage de la base de données dans un tableau interactif avec les noms de colonnes modifiables
-    
                 # Création d'une liste pour stocker les nouveaux noms de colonnes
                 noms_colonnes_modifies = data.columns.tolist()
     
@@ -315,7 +313,7 @@ def page_accueil():
         base_donnees_en_ligne = st.radio("Nous vous proposons cette base de données synthétique:", ("Données commerciales",))
         if base_donnees_en_ligne == "Données commerciales":
             # Charger la base de données en ligne (exemple avec base Commerciale)
-            url = "https://raw.githubusercontent.com/robertmessan/lunettes_parlantes/main/data_bd.csv"  # Remplacer l'URL par l'URL réelle de la base de données en ligne
+            url = "https://raw.githubusercontent.com/robertmessan/lunettes_parlantes/main/data_bd.csv"  # Utilisez une base de données de votre choix
             try:
                 data = charger_base_de_donnees_en_ligne(url)
                 st.subheader("Base de données initiale :")
